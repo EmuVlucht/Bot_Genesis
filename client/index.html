@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VaultVerse - Sistem Manajemen Password yang Aman dan Terenkripsi" />
+  <meta name="theme-color" content="#0f0f0f" />
+  
+  <title>VaultVerse - Password Manager Aman</title>
+  
+  <!-- Preconnect untuk performa -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/vault-icon.svg" />
+  
+  <style>
+    /* Loading screen styles */
+    #app-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0f0f0f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    
+    #app-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loader-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .loader-spinner {
+      border: 3px solid #2a2a2a;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loader-text {
+      color: #a0a0a0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- App Loading Screen -->
+  <div id="app-loader">
+    <svg class="loader-icon" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Memuat VaultVerse...</p>
+  </div>
+
+  <!-- React Root -->
+  <div id="root"></div>
+
+  <!-- Main Script -->
+  <script type="module" src="/src/main.jsx"></script>
+  
+  <script>
+    // Hide loader when app is ready
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('app-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+          setTimeout(() => loader.remove(), 300);
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>
