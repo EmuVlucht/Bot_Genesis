@@ -1,0 +1,79 @@
+# ============================================
+# CARA GENERATE ENCRYPTION KEYS
+# ============================================
+
+# 1. Generate JWT Secret (64+ bytes):
+#    node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+
+# 2. Generate AES Encryption Key (32 bytes):
+#    node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# 3. Generate Export Key (32 bytes):
+#    node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# ============================================
+# SECURITY CHECKLIST UNTUK PRODUCTION
+# ============================================
+
+# ✓ Ganti semua default secret keys dengan yang baru
+# ✓ Set NODE_ENV=production
+# ✓ Gunakan HTTPS untuk semua komunikasi
+# ✓ Set BCRYPT_SALT_ROUNDS ke 12-14
+# ✓ Kurangi RATE_LIMIT_MAX_REQUESTS untuk production
+# ✓ Set CORS_ORIGIN ke domain spesifik
+# ✓ Backup AES_ENCRYPTION_KEY dengan aman
+# ✓ Jangan commit file .env ke Git
+# ✓ Gunakan environment variables di hosting platform
+# ✓ Enable SSL/TLS certificates
+# ✓ Setup regular database backups
+# ✓ Monitor activity logs
+
+# ============================================
+# CARA PENGGUNAAN
+# ============================================
+
+# Development:
+# 1. Copy file ini ke server/.env
+# 2. Generate encryption keys dengan command di atas
+# 3. Sesuaikan PORT dan URL jika perlu
+# 4. Jalankan: npm run dev
+
+# Production:
+# 1. Copy bagian production ke server/.env
+# 2. Generate NEW encryption keys (JANGAN gunakan yang sama dengan dev)
+# 3. Set NODE_ENV=production
+# 4. Set SSL certificates
+# 5. Jalankan: npm start
+
+# Client:
+# 1. Copy bagian frontend ke client/.env
+# 2. Sesuaikan VITE_API_URL dengan backend URL
+# 3. Build: npm run build
+# 4. Deploy folder dist/
+
+# ============================================
+# TROUBLESHOOTING
+# ============================================
+
+# Error "JWT_SECRET not found":
+# - Pastikan file .env ada di folder server/
+# - Pastikan JWT_SECRET sudah diisi
+# - Restart server setelah mengubah .env
+
+# Error "AES_ENCRYPTION_KEY must be 32 characters":
+# - Generate key dengan: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+# - Pastikan length tepat 64 karakter hex (32 bytes)
+
+# Error "Cannot decrypt data":
+# - JANGAN ubah AES_ENCRYPTION_KEY jika sudah ada data
+# - Backup database sebelum mengubah encryption key
+# - Jika terpaksa ubah, export dulu semua data
+
+# CORS Error:
+# - Pastikan CLIENT_URL dan CORS_ORIGIN match dengan frontend URL
+# - Check protokol (http vs https)
+# - Check port number
+
+# ============================================
+# END OF CONFIGURATION
+# ============================================
